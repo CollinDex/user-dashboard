@@ -16,7 +16,7 @@ import { Userdata } from '../userdata';
     </form>
   </section>
   <section class="w-96 md:pl-8 md:pr-8 md:w-screen">
-    <app-users-list></app-users-list>
+    <app-users-list [usersList]="userData"></app-users-list>
   </section>
   `,
   styleUrl: './home.component.scss'
