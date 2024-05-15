@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { UsersListComponent } from '../users-list/users-list.component';
+import { UsersService } from '../users.service';
 import { Userdata } from '../userdata';
 
 @Component({
@@ -23,34 +24,11 @@ import { Userdata } from '../userdata';
 })
 
 export class HomeComponent {
-  userData: Userdata[] = [{
-    id: 1,
-    email: 'test@gmail.com',
-    firstName: 'Collins',
-    lastName: 'Obetta',
-    avatar: 'https://reqres.in/img/faces/1-image.jpg'
-  },
-  {
-    id: 1,
-    email: "george.bluth@reqres.in",
-    firstName: "George",
-    lastName: "Bluth",
-    avatar: "https://reqres.in/img/faces/1-image.jpg"
-  },
-  {
-    id: 2,
-    email: "janet.weaver@reqres.in",
-    firstName: "Janet",
-    lastName: "Weaver",
-    avatar: "https://reqres.in/img/faces/2-image.jpg"
-  },
-  {
-    id: 3,
-    email: "emma.wong@reqres.in",
-    firstName: "Emma",
-    lastName: "Wong",
-    avatar: "https://reqres.in/img/faces/3-image.jpg"
+  userData: Userdata[] = [];
+  userService: UsersService = inject(UsersService);
+
+  constructor () {
+    this.userData = this.userService.getAllUsers();
   }
-  ];
 
 }
