@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
     RouterModule
   ],
   template: `
-  <main class="font-serif bg-gray-200">
+  <main class="font-serif bg-gray-200 min-h-screen">
     <a [routerLink]="['/']">
       <header class="flex flex-row justify-between p-4 bg-gray-300 shadow-md">
         <img src="../assets/logo.svg" alt="Logo" width="150" height="150" aria-hidden="true"/>
