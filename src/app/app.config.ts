@@ -7,7 +7,6 @@ import { provideClientHydration, provideProtractorTestingSupport } from '@angula
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideClientHydration(),
     provideProtractorTestingSupport()
   ]
 };

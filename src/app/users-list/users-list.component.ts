@@ -17,4 +17,5 @@ import { Userdata } from '../userdata';
 })
 export class UsersListComponent {
   @Input() usersList!: Userdata[];
+  
 }

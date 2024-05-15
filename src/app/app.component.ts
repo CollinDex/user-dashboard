@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterModule } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 
 @Component({
@@ -7,7 +7,8 @@ import { HomeComponent } from './home/home.component';
   standalone: true,
   imports: [
     HomeComponent,
-    RouterModule
+    RouterLink,
+    RouterOutlet,
   ],
   template: `
   <main class="font-serif bg-gray-200 min-h-screen">

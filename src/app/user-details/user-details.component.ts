@@ -47,5 +47,3 @@ export class UserDetailsComponent {
         this.user = this.userService.getUsersById(userId);
     }
 }
-
-/* <div class="flex flex-col md:flex-row gap-2 sm:gap-4 md:gap-8 w-80 md:w-full p-2 md:p-4 mt-8 bg-customBlue shadow-md rounded-lg"> */
