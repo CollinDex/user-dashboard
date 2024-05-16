@@ -1,5 +1,13 @@
 # UserDashboard
 
+This project is a dynamic user dahboard that fetches user data from an endpoint and displays a paginated list. A search bar is located at the top and retrieves data from the backend for the userID supplied to it. Each user card clicked will display a details page where all the data for a single user is shown.
+
+This project was builf using the following:
+- Angular
+- TailwindCss
+- Typescript
+- NgRx
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.5.
 
 ## Development server
