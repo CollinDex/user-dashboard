@@ -11,15 +11,15 @@ import { HomeComponent } from './home/home.component';
     RouterOutlet,
   ],
   template: `
-  <main class="font-serif bg-gray-200 min-h-screen">
-    <a [routerLink]="['/']">
-      <header class="flex flex-row justify-between p-4 bg-gray-300 shadow-md">
+  <main class="font-serif bg-gray-200 min-h-screen">   
+    <header class="flex flex-row justify-between p-4 bg-gray-300 shadow-md">
+      <a [routerLink]="['/']">
         <img src="../assets/logo.svg" alt="Logo" width="150" height="150" aria-hidden="true"/>
-        <a href="https://github.com/CollinDex">
+      </a>
+        <a href="https://github.com/CollinDex" target="_blank">
         <img src="../assets/devicon.png" alt="devicon" width="50" height="50" aria-hidden="true"/>
         </a>
-      </header>
-    </a>
+    </header>
     <section class="flex flex-col items-center p-8 w-full">
       <router-outlet></router-outlet>
     </section>

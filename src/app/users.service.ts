@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Userdata } from './userdata';
+import { RequestData, Userdata } from './userdata';
 
 @Injectable({
   providedIn: 'root'
@@ -8,41 +8,49 @@ export class UsersService {
 
   constructor() { }
 
-  userData: Userdata[] = [{
-    id: 1,
-    email: 'test@gmail.com',
-    firstName: 'Collins',
-    lastName: 'Obetta',
-    avatar: 'https://reqres.in/img/faces/1-image.jpg'
-  },
-  {
-    id: 1,
-    email: "george.bluth@reqres.in",
-    firstName: "George",
-    lastName: "Bluth",
-    avatar: "https://reqres.in/img/faces/1-image.jpg"
-  },
-  {
-    id: 2,
-    email: "janet.weaver@reqres.in",
-    firstName: "Janet",
-    lastName: "Weaver",
-    avatar: "https://reqres.in/img/faces/2-image.jpg"
-  },
-  {
-    id: 3,
-    email: "emma.wong@reqres.in",
-    firstName: "Emma",
-    lastName: "Wong",
-    avatar: "https://reqres.in/img/faces/3-image.jpg"
-  }
-  ];
+  /* url = 'https://reqres.in/api/users?page={page}'
+  https://reqres.in/api/users/{id}. */
 
-  getAllUsers(): Userdata[] {
-    return this.userData;
+  url = 'https://reqres.in/api/users';
+
+  async getAllUsers(): Promise<RequestData> {
+    const response = await fetch(this.url);
+
+    if(!response.ok) {
+      throw new Error('Failed to fetch user data');
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data ?? [];
   }
   
-  getUsersById(id: number): Userdata | undefined {
-    return this.userData.find(user => user.id === id);
+  async getUsersById(id: number): Promise<Userdata> {
+    const response = await fetch (`${this.url}/${id}`);
+    console.log(response.status);
+
+    if(response.status === 404) {
+      console.log('fail');
+    }
+
+    /* if(!response.ok) {
+      throw new Error('Failed to fetch user data');
+    } */
+
+    const data = await response.json().then((res) => res.data);
+    console.log(data);
+    return data ?? [];
+  }
+
+  async getPage(page:number): Promise<RequestData> {
+    const response = await fetch(`${this.url}?page=${page}`);
+
+    if(!response.ok) {
+      throw new Error('Failed to fetch user data');
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data ?? [];
   }
 }

@@ -19,8 +19,8 @@ import { RouterOutlet, RouterLink } from '@angular/router';
       />
       <section class="flex flex-col justify-center">
         <p class="text-gray-100 mt-2">Id: {{userData.id}}</p>
-        <p class="text-gray-100 mt-2">First Name: {{userData.firstName}}</p>
-        <p class="text-gray-100 mt-2">Last Name: {{userData.lastName}}</p>
+        <p class="text-gray-100 mt-2">First Name: {{userData.first_name}}</p>
+        <p class="text-gray-100 mt-2">Last Name: {{userData.last_name}}</p>
         <p class="text-gray-100 mt-2">Email: {{userData.email}}</p>
       </section>
     </div>

@@ -1,7 +1,15 @@
 export interface Userdata {
     id: number,
     email: string,
-    firstName: string,
-    lastName: string,
+    first_name: string,
+    last_name: string,
     avatar: string
+}
+
+export interface RequestData {
+    page: number,
+    per_page: number,
+    total: number,
+    total_pages : number,
+    data: Userdata[]
 }

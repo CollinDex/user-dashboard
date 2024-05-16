@@ -27,8 +27,8 @@ import { Userdata } from '../userdata';
         />
         <section class="flex flex-col justify-center pb-4">
           <p class="text-gray-100 mt-2">Id: {{user?.id}}</p>
-          <p class="text-gray-100 mt-2">First Name: {{user?.firstName}}</p>
-          <p class="text-gray-100 mt-2">Last Name: {{user?.lastName}}</p>
+          <p class="text-gray-100 mt-2">First Name: {{user?.first_name}}</p>
+          <p class="text-gray-100 mt-2">Last Name: {{user?.last_name}}</p>
           <p class="text-gray-100 mt-2">Email: {{user?.email}}</p>
         </section>
       </div>
@@ -43,7 +43,10 @@ export class UserDetailsComponent {
   user: Userdata | undefined;
 
     constructor() {
-        const userId = Number(this.route.snapshot.params['id']);
-        this.user = this.userService.getUsersById(userId);
+        const userId = parseInt(this.route.snapshot.params['id'], 10);
+        this.userService.getUsersById(userId)
+          .then((userData: Userdata | undefined) => {
+            this.user = userData;
+          });
     }
 }
