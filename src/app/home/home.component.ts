@@ -23,7 +23,7 @@ import { setUser } from '../user.actions';
     </form>
   </section>
   <section class="w-96 md:pl-8 md:pr-8 md:w-screen">
-    <ng-container *ngIf="filteredUser.length === 0">
+    <ng-container *ngIf="filteredUser.length === 0 && filter.value">
       <div class="bg-green-100 border border-green-400 text-green-700 m-8 px-4 py-3 rounded relative" role="alert">
         <strong class="font-bold">User not Found</strong>
       </div>      
