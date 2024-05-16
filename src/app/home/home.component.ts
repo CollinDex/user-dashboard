@@ -1,21 +1,26 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersListComponent } from '../users-list/users-list.component';
+import { SpinnerComponent } from '../spinner/spinner.component';
 import { UsersService } from '../users.service';
 import { RequestData, Userdata } from '../userdata';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { setUser } from '../user.actions';
 
 @Component({
   selector: 'app-home',
   standalone: true,
   imports: [
     CommonModule,
-    UsersListComponent
+    UsersListComponent,
+    SpinnerComponent
   ],
   template: `
   <section class="w-96 md:pl-8 md:pr-8 md:w-screen">
     <form class="flex flex-row justify-between w-full md:justify-center">
       <input class="border shadow w-4/5 p-2 mr-6" type="text" placeholder=" Search by ID" (keyup)="getUserById($event)" #filter>
-      <button class="bg-yellow-400 hover:bg-opacity-50 font-bold py-2 px-4 rounded" type="button" (click)="filterUser(filter.value)">Search</button>
+      
     </form>
   </section>
   <section class="w-96 md:pl-8 md:pr-8 md:w-screen">
@@ -24,8 +29,8 @@ import { RequestData, Userdata } from '../userdata';
         <strong class="font-bold">User not Found</strong>
       </div>      
     </ng-container>
-    <app-users-list 
-    [usersList]="filteredUser"></app-users-list>
+      <app-spinner *ngIf="pageData.loading === true" ></app-spinner>
+      <app-users-list [usersList]="filteredUser" *ngIf="pageData.loading === false"></app-users-list>
   </section>
   <section class="flex flex-row gap-4 justify-center p-4">
     <img
@@ -55,20 +60,32 @@ export class HomeComponent {
     per_page: 0,
     total: 0,
     total_pages : 0,
-    data:[]
+    data:[],
+    loading: false
   };
   user: Userdata | undefined;
 
+  private store = inject(Store);
+  users?:Observable<{ users: Userdata[] }>;
 
   constructor () {
+    this.users = this.store.select('users');
+    
+    this.pageData.loading = true;
     this.userService.getAllUsers()
       .then((res) => {
         this.pageData = res;
         return res.data})
       .then((userData: Userdata[]) => {
-        this.userData = userData;
-        this.filteredUser = userData;
+        this.store.dispatch(setUser({users: userData}));
+
+        this.users?.subscribe(users => {
+          this.userData = users.users;
+          this.filteredUser = users.users;
+          this.pageData.loading = false;
+        });
     });
+
   }
 
   filterUser(id: string) {
@@ -136,5 +153,4 @@ export class HomeComponent {
         });
     }
   }
-
 } 

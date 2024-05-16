@@ -11,5 +11,6 @@ export interface RequestData {
     per_page: number,
     total: number,
     total_pages : number,
-    data: Userdata[]
+    data: Userdata[],
+    loading: boolean
 }

@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { Observable } from 'rxjs';
+import { Userdata } from './userdata';
+import { Store } from '@ngrx/store';
+import { setUser } from './user.actions';
 
 @Component({
   selector: 'app-root',
@@ -29,4 +33,16 @@ import { HomeComponent } from './home/home.component';
 })
 export class AppComponent {
   title = 'user-dashboard';
+  private store = inject(Store)
+  users:Observable<Userdata[]>;
+
+  constructor(){
+    this.users = this.store.select('users');
+  }
+
+  update(users:Userdata[]) {
+    this.store.dispatch(setUser({users}));
+    console.log(this.users);
+  }
+
 }
