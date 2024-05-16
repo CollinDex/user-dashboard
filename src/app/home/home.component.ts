@@ -18,9 +18,8 @@ import { setUser } from '../user.actions';
   ],
   template: `
   <section class="w-96 md:pl-8 md:pr-8 md:w-screen">
-    <form class="flex flex-row justify-between w-full md:justify-center">
-      <input class="border shadow w-full p-2 mr-6" type="text" placeholder=" Search by ID" (keyup)="getUserById($event)" #filter>
-      
+    <form class="flex w-full justify-center">
+      <input class="border shadow w-full p-2 " type="text" placeholder=" Search by ID" (keyup)="getUserById($event)" #filter>
     </form>
   </section>
   <section class="w-96 md:pl-8 md:pr-8 md:w-screen">
@@ -32,7 +31,7 @@ import { setUser } from '../user.actions';
       <app-spinner *ngIf="pageData.loading === true" ></app-spinner>
       <app-users-list [usersList]="filteredUser" *ngIf="pageData.loading === false"></app-users-list>
   </section>
-  <section class="flex flex-row gap-4 justify-center p-4">
+  <section class="flex flex-row gap-4 justify-center p-4" *ngIf="filteredUser.length !== 0">
     <img
         class="h-8 w-8 hover:cursor-pointer" 
         src= "../../assets/arrow_left.png"
@@ -132,8 +131,12 @@ export class HomeComponent {
           this.pageData = res;
           return res.data})
         .then((userData: Userdata[]) => {
-          this.userData = userData;
-          this.filteredUser = userData;
+          this.store.dispatch(setUser({users: userData}));
+          this.users?.subscribe(users => {
+            this.userData = users.users;
+            this.filteredUser = users.users;
+            this.pageData.loading = false;
+          });
         });
     }    
   }
@@ -148,9 +151,14 @@ export class HomeComponent {
           this.pageData = res;
           return res.data})
         .then((userData: Userdata[]) => {
-          this.userData = userData;
-          this.filteredUser = userData;
+          this.store.dispatch(setUser({users: userData}));
+          this.users?.subscribe(users => {
+            this.userData = users.users;
+            this.filteredUser = users.users;
+            this.pageData.loading = false;
+          });
         });
-    }
+    }    
   }
+
 } 

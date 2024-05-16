@@ -7,10 +7,6 @@ import { RequestData, Userdata } from './userdata';
 export class UsersService {
 
   constructor() { }
-
-  /* url = 'https://reqres.in/api/users?page={page}'
-  https://reqres.in/api/users/{id}. */
-
   url = 'https://reqres.in/api/users';
 
   async getAllUsers(): Promise<RequestData> {
@@ -32,10 +28,6 @@ export class UsersService {
     if(response.status === 404) {
       console.log('fail');
     }
-
-    /* if(!response.ok) {
-      throw new Error('Failed to fetch user data');
-    } */
 
     const data = await response.json().then((res) => res.data);
     console.log(data);
