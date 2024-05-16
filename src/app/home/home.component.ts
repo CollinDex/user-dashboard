@@ -104,6 +104,7 @@ export class HomeComponent {
     const input = event.target as HTMLInputElement;
     const id = parseInt(input.value);
     if (!id) {
+      this.pageData.loading = false;
       this.filteredUser = this.userData;
       return;
     }
@@ -126,6 +127,7 @@ export class HomeComponent {
       return;
     }
     if (page > 1) {
+      this.pageData.loading = true;
       this.userService.getPage(--page)
         .then((res) => {
           this.pageData = res;
@@ -145,7 +147,9 @@ export class HomeComponent {
     if (!page) {
       return;
     }
+    
     if (page < total) {
+      this.pageData.loading = true;
       this.userService.getPage(++page)
         .then((res) => {
           this.pageData = res;
