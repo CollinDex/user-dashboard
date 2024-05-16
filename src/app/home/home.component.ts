@@ -19,7 +19,7 @@ import { setUser } from '../user.actions';
   template: `
   <section class="w-96 md:pl-8 md:pr-8 md:w-screen">
     <form class="flex flex-row justify-between w-full md:justify-center">
-      <input class="border shadow w-4/5 p-2 mr-6" type="text" placeholder=" Search by ID" (keyup)="getUserById($event)" #filter>
+      <input class="border shadow w-full p-2 mr-6" type="text" placeholder=" Search by ID" (keyup)="getUserById($event)" #filter>
       
     </form>
   </section>
