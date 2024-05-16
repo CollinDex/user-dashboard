@@ -2,7 +2,7 @@
 
 This project is a dynamic user dahboard that fetches user data from an endpoint and displays a paginated list. A search bar is located at the top and retrieves data from the backend for the userID supplied to it. Each user card clicked will display a details page where all the data for a single user is shown.
 
-This project was builf using the following:
+This project was built using the following:
 - Angular
 - TailwindCss
 - Typescript
